@@ -1,0 +1,182 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  width: 100%;
+  height: 100%;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+   scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+:root{
+
+  /* background color */
+  --primary-bg-color: black;
+  --primary-accent-bg: #0693e3;
+  --search-bar-background: white;
+  --primary-hover-bg: hwb(202 2% 50%);
+  --primary-accent-hover-bg: hwb(202 2% 30%);
+  --secondary-accent-hover-bg: hwb(202 0% 85%);
+  --secondary-color-bg: rgba(255, 255, 255, .9);
+  --secondary-hover-bg-color: rgba(255, 255, 255, .5);
+
+/* color */
+  --primay-color: white;
+  --secondary-color: rgba(255, 255, 255, .5);
+  --primary-accent-color: #0693e3;
+  --secondary-accent-color: hwb(202 2% 30%);
+
+  /* shadow */
+
+  /* sizes */
+  --h1-font-size: 2rem;
+  --primary-fontsize: 1.2rem;
+
+  /* border radius */
+  --primary-border-radius: 5px;
+  --round-border-radius: 100%;
+  --pillshape-border: 100px;
+
+}
+
+/* paddings */
+.primaryWidth{
+
+    width: 90%;
+    margin-inline: auto;
+    position: relative;
+
+}
+.primaryPadding{
+
+    padding-block: 2rem;
+    margin-inline: auto;
+
+}
+.secondaryPadding{
+
+  padding-block: 3rem;
+
+}
+.tercaryPadding{
+
+  padding-block: 1rem;
+
+}
+.headerPadding{
+
+  padding-top: 2rem;
+  margin-inline: auto;
+
+}
+.navLink{
+
+  color: white;
+  text-decoration: none;
+
+}
+/* multiple used class */
+.logo{
+
+    width: 30px;
+    height: 30px;
+
+}
+
+/* normal changes */
+#root{
+
+  position: relative;
+
+}
+.body{
+
+  height: 100vh;
+  width: 100vw;
+
+}
+body{
+
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--primary-bg-color);
+    color: var(--primay-color);
+
+}
+ul{
+    list-style-type: none;
+}
+
+.mainPage{
+
+  height: 100%;
+  max-width: 1600px;
+  margin-inline: auto;
+
+}

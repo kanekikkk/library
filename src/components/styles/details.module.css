@@ -1,0 +1,292 @@
+/* multi used */
+.detailsDiv{
+
+    padding-block: 1rem;
+
+}
+.flex{
+
+    display: flex;
+
+}
+.img{
+
+    border-radius: 5px;
+
+}
+.hide{
+
+    display: none;
+    position: absolute;
+
+}
+.logo{
+
+    width: 15px;
+
+}
+.arrow{
+
+    width: 23px;
+    transform: rotate(180deg);
+    margin-left: .7rem;
+
+}
+.infoRating{
+
+    margin-top: 3rem;
+    
+}
+.infoRating h3{
+
+    font-size: 1rem;
+    text-align: center;
+    font-weight: 700;
+
+}
+.infoRating h4{
+
+    font-size: .9rem;
+    font-weight: 500;
+
+}
+.infoRating h5{
+
+    font-size: .9rem;
+    
+}
+.infoRating .flex{
+
+    align-items: center;
+    gap: .5rem;
+    justify-content: center;
+
+}
+
+/*  */
+
+/*  */
+.imgDiv{
+
+    width: 13rem;
+    height: 20rem;
+    border: 3px solid var(--primary-hover-bg);
+    border-radius: 10px;
+
+}
+.main.flex{
+
+    justify-content: space-between;
+
+}
+.Details{
+
+    padding-inline: 1rem;
+    padding-top: 5rem;
+
+}
+.info{
+
+    width: 65%;
+
+}
+.info h1{
+
+    font-weight: 600;
+    font-size: 2.6rem;
+
+}
+.author{
+
+    color: var(--primary-accent-bg);
+    font-weight: 600;
+
+}
+.infoRating > *{
+
+    position: relative;
+
+}
+.infoRating > *:first-child{
+
+    padding-right: 1.5rem;
+
+}
+.infoRating >*:not(:first-child):before{
+
+    content: '';
+    position: absolute;
+    height: 60%;
+    width: 1px;
+    border: 1px solid rgba(255, 255, 255, .6);
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+
+}
+.infoRating > * + *{
+
+    padding-inline: 1.5rem;
+
+}
+.bookLogo{
+
+    width: 17px;
+
+}
+.buttons{
+
+    margin-top: 3.5rem;
+    gap: 2rem;
+    font-weight: 600;
+
+}
+.buttons button{
+
+    width: 11rem;
+    height: 2.4rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+.buttons button.flex{
+
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+
+}
+.buttons button{
+
+    border: 1px solid white;
+    background-color: black;
+    color: white;
+    transition: .25s ease-in-out;
+
+}
+.buttons button:hover{
+
+    background-color: rgba(255, 255, 255, .1);
+
+}
+.buttons > *:not(:first-child) button{
+
+    border: 1px solid var(--primary-accent-bg);
+    background-color: black;
+    color: var(--primary-accent-bg);
+
+}
+.buttons > *:not(:first-child) button:hover{
+
+    border: 1px solid var(--primary-accent-bg);
+    background-color: var(--secondary-accent-hover-bg);
+
+}
+
+/* aboutBook */
+.aboutBook{
+
+    margin-top: 2rem;
+
+}
+.aboutBook h2{
+
+    text-align: left;
+    font-size: 1.5rem;
+    padding-block: 4rem 1.5rem;
+
+}
+
+@media (max-width: 985px) {
+    
+    .buttons{
+
+        gap: .7rem;
+
+    }
+
+}
+@media (max-width: 925px) {
+    
+    .hide{
+
+        position: relative;
+        display: block;
+
+    }
+    .buttons{
+
+        gap: .7rem;
+
+    }
+    .hideMin{
+
+        display: none;
+        position: relative;
+
+    }
+    .info{
+
+        margin: auto;
+
+    }
+    .info h1{
+
+        text-align: center;
+        font-size: 2.1rem;
+
+    }
+    .info .author{
+
+        text-align: center;
+
+    }
+    .info .imgDiv{
+
+        margin: auto;
+        margin-bottom: 2rem;
+
+    }
+    .info .flex:not(h2){
+
+        justify-content: center;
+
+    }
+    .info h2{
+
+        padding-top: 2rem;
+
+    }
+
+}
+
+@media (max-width: 590px) {
+    
+    .buttons{
+
+        flex-wrap: wrap;
+
+
+    }
+    .buttons button{
+
+        flex-basis: 100%;
+
+    }
+
+}
+@media (max-width: 420px) {
+    
+    .infoRating > * + *{
+
+        padding-inline: 1rem;
+    
+    }
+    .infoRating > *:first-child{
+
+        padding-right: 1rem;
+
+    }
+
+}

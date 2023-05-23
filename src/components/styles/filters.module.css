@@ -1,0 +1,112 @@
+:root{
+
+    --width-of-element: 10rem;
+    --padding: .3rem 3em .3rem 1.3rem;
+
+}
+/* multiple used classes */
+.flex{
+
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    justify-self: right;
+
+}
+.filters{
+
+    position: relative;
+
+}
+hr{
+
+    position: absolute;
+    width: 100%;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, .2);
+    /* border-color: black; */
+
+}
+.top{
+
+    left: 0;
+    top: 1rem; 
+
+}
+.bottom{
+
+    left: 0;
+    bottom: 1rem;
+
+}
+/* selectDiv */
+.selectDiv{
+
+    position: relative;
+
+}
+.selectDiv::before{
+
+    position: absolute;
+    content: ' ';
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 10px solid var(--secondary-accent-color);
+    right: .9rem;
+    top: 35%;
+
+}
+
+/* wishlist */
+.wishList.flex, .library.flex{
+
+    gap: .6rem;
+    justify-content: center;
+    align-items: center;
+    padding-block: .22rem;
+    width: var(--width-of-element);
+    border-radius: var(--primary-border-radius);
+    cursor: pointer;
+    border: 1px solid var(--secondary-accent-color);
+
+}
+.wishList.flex:hover, .library.flex:hover{
+
+    background-color: var(--secondary-accent-hover-bg);
+    color: var(--primay-color);
+
+}
+.wishList p, .library p{
+
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--primary-accent-color);
+
+}
+.bag{
+
+    width: 17px;
+    height: 17px;
+
+}
+
+@media (max-width: 780px) {
+    
+    .filters.flex{
+
+        justify-content: center;
+        align-items: center;
+    
+    }
+
+}
+@media (max-width: 376px){
+
+    .library{
+
+        margin-inline: auto;
+
+    }
+
+}

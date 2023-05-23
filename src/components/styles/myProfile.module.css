@@ -1,0 +1,151 @@
+
+.flex{
+
+    display: flex;
+
+}
+.flexDynamic{
+
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+/*  */
+.Details{
+
+    padding-inline: 1rem;
+    padding-top: 5rem;
+    width: 100%;
+
+}
+.hide{
+
+    display: none;
+    position: absolute;
+
+}
+.Details>.flex{
+
+    justify-content: center;
+    gap: 2rem;
+
+}
+.img{
+
+    width: 18rem;
+    margin-right: 1rem;
+    border: 2px solid var(--primary-accent-color);
+    border-radius: 10px;
+
+}
+.info .flex{
+
+    align-items: center;
+
+}
+.info .name button{
+
+    padding-inline: .5rem;
+    font-size: 1rem;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    border-radius: 5px;
+    margin-left: 1rem;
+    cursor: pointer;
+
+}
+.info input{
+
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: .2rem .5rem;
+
+}
+.info input:hover{
+    background-color: transparent;
+
+}
+h1 button:hover{
+
+    background-color: rgb(255, 255, 255,  .1);
+
+}
+.info{
+
+    width: 65%;
+
+}
+.info p{
+
+    color: var(--primary-accent-color);
+
+}
+.infoDiv{
+
+    margin-top: 4rem;
+
+}
+.infoDiv > *{
+
+    margin-top: .7rem;
+    align-items: center;
+    gap: .5rem;
+
+}
+.infoDiv .libraryButton{
+
+    font-weight: 600;
+    border: 1px solid var(--primary-accent-color) !important;
+    color: var(--primary-accent-color) !important;
+    background-color: transparent;
+    cursor: pointer;
+    width: 9rem;
+    padding: .5rem 1rem;
+    border-radius: 5px;
+
+}
+.infoDiv .libraryButton:hover{
+
+    background-color: var(--secondary-accent-hover-bg) !important;
+
+}
+.infoDiv > * + *{
+
+    margin-left: 1rem;
+
+}
+@media (max-width: 718px) {
+    
+    .Details{
+
+        width: 100%;
+        text-align: center;
+        padding-bottom: 3rem;
+
+    }
+    .flex{
+
+        justify-content: center;
+
+    }
+    .flexDynamic{
+
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+
+    }
+
+}
+@media (max-width: 555px) {
+    
+    .infoDiv > * + *{
+
+        margin-left: .1rem;
+    
+    }
+
+}

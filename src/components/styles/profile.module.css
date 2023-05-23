@@ -1,0 +1,183 @@
+.flex{
+
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+    align-items:flex-start
+
+}
+.logo{
+
+    width: 35px;
+
+}
+.subLogo{
+
+    width: 20px;
+    height: 20px;
+
+}
+.backLogo{
+
+    width: 26px;
+    height: 26px;
+
+}
+.backLogo:hover{
+
+    width: 26px;
+    background-color: rgba(255, 255, 255, .3);
+    border-radius: 100%;
+    outline: 3px solid rgba(255, 255, 255, .3);
+
+
+}
+.backLogo:active{
+
+    width: 26px;
+    background-color: rgba(255, 255, 255, .1);
+    outline: 3px solid rgba(255, 255, 255, .1);
+
+}
+
+.hrr{
+
+    width: 100%;
+    left: 0;
+
+}
+.first{
+
+    margin-top: 1rem;
+
+}
+.header{
+
+    margin: 0;
+
+}
+.options{
+
+    padding-top: .5rem !important;
+    margin-left: 0 !important;
+
+}
+.textarea{
+
+    resize: none;
+    border-radius: var(--primary-border-radius);
+    border: none;
+    outline: 1px solid rgba(255, 255, 255, .6);
+    background-color: inherit;
+    color: white;
+    padding: 1rem 1.1rem;
+    box-sizing: border-box;
+
+}
+.buttonSend{
+
+    margin-block: 1.5rem;
+    width: 122%;
+    background-color: var(--primary-hover-bg) !important;
+
+}
+
+/*  */
+.profileDiv{
+
+    position: absolute;
+    min-width: 16rem;
+    right: -.7rem;
+    top: 2.5rem;
+    padding-right: 1rem;
+    border-radius: var(--primary-border-radius);
+    background-color: hsl(0, 0%, 7%);
+    z-index: 6;
+
+}
+.profile{
+
+    width: 86%;
+    padding-block: .8rem;
+    margin: auto;
+
+}
+.profileDiv .info p{
+
+    font-weight: 600;
+}
+.userName{
+
+    font-size: .9rem;    
+
+}
+.userEmail{
+
+    font-size: .8rem;
+    color: var(--primary-accent-bg);
+    overflow: hidden;
+    width: min-content;
+
+}
+.edit{
+
+    padding: .2rem .5rem !important;
+    font-size: .8rem;
+
+}
+/*  */
+.others{
+
+    width: 84%;
+    padding-block: 1.5rem;
+    margin: auto;
+    text-align: left;
+
+
+}
+.others h4{
+
+    position: relative;
+    top: 50%;
+    left: 10%;
+    text-align: center;
+    font-weight: 600;
+
+}
+.others p{
+
+    font-weight: 600;
+
+}
+.others .flex{
+
+    gap: 1rem;
+    align-items:end;
+
+}
+.others > div{
+
+    padding: .4rem .5rem;
+    border-radius: var(--primary-border-radius);
+
+}
+.others > div:hover:not(.header):not(.feedback){
+
+    background-color: rgba(255, 255, 255, .3);
+
+}
+.others > div:active:not(.header):not(.feedback){
+
+    background-color: rgba(255, 255, 255, .1);
+
+}
+.others > div + div{
+
+    margin-top: .5rem;
+
+}
+.others .setting{
+
+    margin-left: 1rem;
+
+}

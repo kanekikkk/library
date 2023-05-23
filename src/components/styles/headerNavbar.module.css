@@ -1,0 +1,347 @@
+/* multiple used class */
+.flex{
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: inherit;
+
+}
+.hide{
+
+    visibility: hidden;
+    display: none;
+
+}
+.logo{
+
+    width: 30px;
+    outline: none;
+
+}
+.icon{
+
+    width: 18px;
+
+}
+.hrr{
+
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, .2);
+
+}
+
+header{
+
+    /* position: fixed; */
+    width: 100%;
+
+}
+/* productName */
+.productName{
+
+    font-size: 2rem;
+    cursor: pointer;
+    width: 100% !important;
+
+}
+
+/* navBar */
+.navBar{
+
+    flex-grow: .8;
+
+}
+
+/* searchBar */
+.searchBar{
+
+    box-sizing: content-box;
+    background-color: var(--search-bar-background);
+    padding: 0rem .7rem;
+    border-radius: var(--primary-border-radius);
+    flex-basis: 60%;
+    position: relative;
+    height: 2.8rem;
+
+}
+.searchBar input{
+
+    border: none;
+    width: 100%;
+
+}
+.searchBar input:focus{
+
+    outline: none;
+
+}
+button.search{
+
+    border: none;
+    background-color: var(--search-bar-background);
+    cursor: pointer;
+    width: 35px;
+
+}
+.hamburger{
+
+    width:30px;
+    height: 30px;
+    padding-block: .3rem;
+    padding-inline: .4rem 0;
+    border-left: 1px solid var(--primary-accent-hover-bg);
+    cursor: pointer;
+    
+}
+.searchStyle{
+
+    position: absolute;
+    color: var(--primary-bg-color);
+    background-color: white;
+    top: 110%;
+    right: 0;
+    z-index: 1;
+    width: 8rem;
+    padding-block: .6rem;
+    border-radius: var(--primary-border-radius);
+
+}
+.searchStyle  > * + *{
+
+    margin-top: .5rem;
+
+}
+.searchStyle  p{
+
+    cursor: pointer;
+    text-align: center;
+    margin-inline: .7rem;
+    padding-block: .2rem;
+
+}
+.searchStyle > *:hover{
+
+    background-color: var(--primary-accent-bg);
+    border-radius: var(--primary-border-radius);
+
+}
+
+/* extra */
+.searchWhiteSvg{
+
+    fill: white;
+
+}
+.random{
+
+    padding: .6rem;
+    border-radius: var(--round-border-radius);
+    cursor: pointer;
+
+}
+.randomLogo{
+
+    width: 26px;
+    height: 26px;
+
+}
+.random:hover{
+
+    background-color: var(--primary-hover-bg);
+
+}
+.extra{
+
+    text-align: center;
+    gap: 1.5rem;
+    margin-left: auto;
+    margin-right: 0;
+    width: min-content;
+
+}
+.extra > *{
+
+    cursor: pointer;
+
+}
+.profile{
+
+    position: relative;
+
+}
+.profile button{
+
+    padding: .4rem .6rem;
+    font-weight: 600; 
+    border: none;
+    border-radius: var(--primary-border-radius);
+    float: left;
+    color: var(--primary-color);
+    background-color: var(--primary-accent-bg);
+    box-shadow: var(--primary-accent-shadow);
+    cursor: pointer;
+
+}
+
+.profile button:hover{
+
+    background-color: var(--primary-accent-hover-bg);
+
+}
+
+@media (max-width: 980px){
+
+    .productName{
+
+        font-size: 1.4rem;
+        cursor: pointer;
+    
+    }
+    
+
+}
+
+@media (max-width: 780px){
+
+    .hide{
+
+        visibility: visible;
+        display:flex;
+        align-items: center;
+
+    }
+    .hideMin{
+
+        visibility: hidden;
+        display: none;
+
+    }
+    /* nav */
+
+    .secondaryNavDiv{
+
+        justify-content: center;
+        width: 100%;
+
+    }
+    form{
+
+        flex: .7 0 100%;
+
+    }
+    input{
+
+        width: 10rem;
+
+    }
+    /* .profile button{ */
+
+        /* position: absolute; */
+
+    /* } */
+    .searchBar{
+
+        width: 100%;
+
+    }
+
+    /* sideNav */
+    .sideNavDiv{
+
+        width: 100vw;
+        height: 100vh;
+        background: rgba(255, 255, 255, .1);
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        backdrop-filter: blur(6px);
+
+    }
+    .sideNav{
+
+        height: 100vh;
+        width: 20rem;
+        background-color: hsl(0, 0%, 4%);
+        position: absolute;
+        right: 0;
+        z-index: 3;
+
+    }
+    .header{
+
+        justify-content: left;
+        gap: .5rem;     
+        padding: .9rem 1.3rem;
+
+    }
+    .exitButton{
+
+        width: 40px;
+        height: 30px;
+        background-color: rgba(255, 255, 255, .1);
+        border-radius: 5px;
+        border: none;
+        margin-right: .5rem;
+
+    }
+    .infoDiv{
+
+        padding: 1.3rem 2.4rem;
+
+    }
+    .info{
+
+        justify-content: left;
+        gap: .6rem;
+
+    }
+    .info p{
+
+        font-weight: 600;
+        font-size: .98rem;
+
+    }
+    .infoDiv .info + .info{
+
+        margin-top: .6rem;
+
+    }
+    .logoOut{
+
+        position: absolute;
+        bottom: 1.3rem;
+        left: 1rem;
+        padding: .5rem .5rem;
+        font-size: .9rem;
+        background-color: var(--primary-accent-hover-bg);
+        border-radius: 3px;
+        font-weight: 600;
+
+    }
+
+}
+@media (max-width: 560px){
+
+    header > .flex .productName{
+
+        width: 40%;
+
+    }
+
+}
+@media (max-width: 478px){
+
+    header > .flex .productName{
+
+        width: 60%;
+
+    }
+    .productName{
+
+        font-size: 1.3rem;
+    
+    }
+
+}

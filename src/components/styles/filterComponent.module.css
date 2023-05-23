@@ -1,0 +1,71 @@
+.hide{
+
+    display: none;
+
+}
+
+label{
+
+    border: none;
+    cursor: pointer;
+    background-color: none;
+    display: block;
+
+}
+input:hover{
+
+    background-color: var(--secondary-color-bg);
+
+}
+.select{
+
+    border: none;
+    border-radius: var(--primary-border-radius);
+    padding: var(--padding);
+    width: 10rem;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+
+}
+.select:hover{
+
+    background-color: var(--secondary-color-bg);
+    border: none;
+
+}
+select:focus{
+
+    outline: none;
+
+}
+select::before{
+
+    contain: 'WHAT IS YOUR NAME';
+
+}
+.options{
+
+    background-color: var(--primay-color);
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    padding-block: 1rem;
+    padding-left: 1.2rem;
+    border-radius: var(--primary-border-radius);
+    padding-right: 1rem;
+    z-index: 1;
+
+}
+.options > *{
+
+    padding: .3rem 1rem;
+    border-radius: var(--primary-border-radius);
+
+}
+.options > *:hover{
+
+    background-color: var(--primary-accent-color);
+
+}
