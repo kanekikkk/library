@@ -1,13 +1,15 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import style from './styles/filterComponent.module.css';
 
-function filterComponent({dispatch, filterState, type, values}){
+function filterComponent({dispatch, set, filterState, type, values}){
 
     const[state, setState] = useState(type);
 
-    async function selectedType(){
+    useEffect(()=>{
 
-        const value = await fetch('http://localhost:3000/'+type, {
+        if(state != 'Genre'){
+
+            const value = new Promise ((res, rej)=>res(fetch('http://localhost:3000/filter/'+type, {
 
             headers: {
                 'Accept': 'application/json',
@@ -16,9 +18,13 @@ function filterComponent({dispatch, filterState, type, values}){
             method: "POST",
             body: JSON.stringify({type: state})
 
-        })
+            })))
+            value.then((value)=>value.json())
+            .then((val)=>console.log(val));
 
-    }
+        }
+
+    },[state])
 
     function handlePop(e){
 
@@ -41,7 +47,7 @@ function filterComponent({dispatch, filterState, type, values}){
             <label>{state}</label>
             <div  onClick={(e)=>{e.stopPropagation();dispatch({type: ''})}} className={style.options + ' '+ (filterState[type]? ' ' : style.hide)}>
 
-                {values.map((value)=><label className="" onClick={(e)=>{e.stopPropagation(); setState(value)}}>{value}</label>)}
+                {values.map((value)=><label className="" onClick={(e)=>{setState(value), set(value)}}>{value}</label>)}
 
             </div>
             

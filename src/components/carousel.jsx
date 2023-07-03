@@ -1,24 +1,57 @@
-import React, {useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
+import star from './icons/star-svgrepo-com.svg';
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; 
 
 import style from './styles/carosel.module.css';
-// import star from './icons/star-svgrepo-com.svg';
-
-
-// import thinLikeAMonk from './image/think like a monk.jpg';
-// import thinLikeAMonkPdf from './pdf/16-05-2021-072848Think-Like-a-Monk.pdf';
-
-// import atomicHabit from './resource/Atomic habits/10457043-L.jpg';
-// import atomicHabitPdf from './resource/Atomic habits/atomic-habits.pdf';
 
 
 function Carousel(){
 
-    // const arr = [{img: thinLikeAMonk, pdf: thinLikeAMonkPdf, rating: 7, name: 'Think Like a monk'},{img: atomicHabit, pdf: atomicHabitPdf, rating: 9, name: 'Atomic Habits'},{img: thinLikeAMonk, pdf: thinLikeAMonkPdf, rating: 7, name: 'Think Like a monk'}, {img: thinLikeAMonk, pdf: thinLikeAMonkPdf, rating: 7, name: 'Think Like a monk'}, {img: thinLikeAMonk, pdf: thinLikeAMonkPdf, rating: 7, name: 'Think Like a monk'}, {img: thinLikeAMonk, pdf: thinLikeAMonkPdf, rating: 7, name: 'Think Like a monk'}, {img: thinLikeAMonk, pdf: thinLikeAMonkPdf, rating: 7, name: 'Think Like a monk'}];
-    const arr = [];
-    console.log('hello');
+    const [carosel,setCarosel] = useState([]);
+    const [carosel2,setCarosel2] = useState([]);
+
+    useEffect(()=>{
+
+        let response = new Promise((res, rej)=> res(fetch('http://localhost:3000/carousel',{
+
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "Post"
+        
+        }))
+        )
+
+        response.then((response)=>response.json()).then((response)=>{
+
+            setCarosel(response.map((val)=>{
+                return{index: val.id, title: val.title, src: `data:image/png;base64, ${val.src}`}
+            }));
+
+        });
+        let response2 = new Promise((res, rej)=> res(fetch('http://localhost:3000/carousel2',{
+
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "Post"
+        
+        }))
+        )
+
+        response2.then((response)=>response.json()).then((response)=>{
+
+            setCarosel2(response.map((val)=>{
+                return{index: val.id, title: val.title, src: `data:image/png;base64, ${val.src}`}
+            }));
+
+        });
+
+    }, [])
 
     return(
         <div className={style.carousel}>
@@ -32,7 +65,19 @@ function Carousel(){
                     
                         <div className={style.flex +' '+ style.carouselDiv}>
                 
-                            {arr.map(val => <CarouselCard key={val.img} content={val}/>)}
+                            {carosel.map(val => <CarouselCard content={val} />)}
+
+                        </div>
+
+                    </div>
+                    <div className={style.heading + ' '+ style.paddingTop}>
+                        <h1>Recently Added</h1>
+                    </div>
+                    <div>
+                    
+                        <div className={style.flex +' '+ style.carouselDiv}>
+                
+                            {carosel2.map(val => <CarouselCard content={val} />)}
 
                         </div>
 
@@ -46,7 +91,7 @@ function Carousel(){
 }
 
 function CarouselCard({content}){
-
+ 
     const [hide, setHide] = useState(true); 
     return <div className="tercaryPadding">
 
@@ -56,7 +101,7 @@ function CarouselCard({content}){
     
             <div className={style.image} onMouseOver={(e)=>{setHide(false)}} onMouseOut={()=>setHide(true)}>
     
-                <img className={style.img} src={content.img} alt="thinklikeamonk" />
+                <img className={style.img} src={content.src} alt="thinklikeamonk" />
     
             </div>
             <div className={style.info +' '+ (hide?style.hide:'')} onMouseOver={()=>setHide(false)} onMouseOut={()=>setHide(true)}>
@@ -67,10 +112,10 @@ function CarouselCard({content}){
                         <div className={style.logo}>
                             <img src={star} alt="star" />
                         </div>
-                        <p className={style.bookName}>{content.rating}/10</p>
+                        <p className={style.bookName}>7/10</p>
                     </div>
-                    <p className={style.bookName}>{content.name}</p>
-                    <Link className='navLink' to={'/details/'+content.name} state={{ content: content }} ><button className={style.viewDetails}>View Details</button></Link>
+                    <p className={style.bookName}>{content.title}</p>
+                    <Link className='navLink' to={'/details/'+content.title} state={{ val: content }} ><button className={style.viewDetails}>View Details</button></Link>
                 </div>
                 
             </div>

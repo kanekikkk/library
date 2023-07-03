@@ -10,94 +10,22 @@ import UseContext from './useContext';
 import { NavLink, Outlet } from 'react-router-dom';
 import { useState } from 'react';
 
-function NavBar({hamburgerNav, setHamburgerNav, hideSearchBar, setHideSearchBar, setProfileOpen, profileOpen}){
+function NavBar({setFilterValue, setFilterCheck, setSearchVal, handleSearchResult, hamburgerNav, setHamburgerNav, hideSearchBar, setHideSearchBar, setProfileOpen, profileOpen}){
 
 
     const value = useContext(UseContext);
     const [searchValue, setSearchValue] = useState('');
     const [searchTypeValue, setSearchTypeValue] = useState('All Types');
-    let defaultName = 'Kitab E-Books';
+    // let defaultName = 'Kitab E-Books';
     const [productName, setProductName] = useState('Kitab E-Books');
-    const alphabet = [
-        "A",
-        "B",
-        "C",
-        "D",
-        "E",
-        "F",
-        "G",
-        "H",
-        "I",
-        "J",
-        "K",
-        "L",
-        "M",
-        "N",
-        "O",
-        "P",
-        "Q",
-        "R",
-        "S",
-        "T",
-        "U",
-        "V",
-        "W",
-        "X",
-        "Y",
-        "Z",
-    ];
-     
-    // useEffect(()=>{
-
-    //     let length = defaultName.length;
-    //     let start = 0;
-
-    //         setProductName('');
-    //         for(let i = 0; i < length; i++){
-
-    //             (function(i){
-
-    //                 setTimeout(()=>{
-    //                     console.log(i);
-
-    //                     start++;
-    //                 }, 3000)
-
-    //             })(i); 
-
-    //         }
-
-
-    // },[])
-
-    function setTimeOut(start){
-
-
-
-        return start;
-
-    }
-
-    async function handleSearch(e){
+    function handleSearch(e){
 
         e.preventDefault();
         setHideSearchBar(true);
         setSearchValue('');
-        let a = await fetch('http://localhost:3000/search',{
+        handleSearchResult(searchValue, searchTypeValue);
 
-            headers: {
-                'Accept': 'application/json/pdf',
-                'Content-Type': 'application/json/pdf'
-            },
-            method: "Post",
-            body: JSON.stringify({searchValue: searchValue, searchTypeValue: searchTypeValue})
-
-        })
-        console.log(a);
-        window.open(a);
-        
-
-    }   
+    }
 
     return(
         <>
@@ -105,7 +33,7 @@ function NavBar({hamburgerNav, setHamburgerNav, hideSearchBar, setHideSearchBar,
 
             <div className={style.flex+" primaryWidth headerPadding"}>
 
-                <NavLink className='navLink' to='/'><h1 className={style.productName+' '+(hideSearchBar?'': style.hideMin)}>{productName}</h1></NavLink>
+                <NavLink className='navLink' to='/'><h1 onClick={(e)=>{setSearchVal(''); setFilterValue(['','','']);setFilterCheck(false);e.stopPropagation()}} className={style.productName+' '+(hideSearchBar?'': style.hideMin)}>{productName}</h1></NavLink>
                 
                 <nav className={style.navBar}>
                     
@@ -124,6 +52,7 @@ function NavBar({hamburgerNav, setHamburgerNav, hideSearchBar, setHideSearchBar,
                             <div className={style.searchStyle+ ' ' +(!hamburgerNav?(style.hide + ' ' +style.hideMin):'')}>
                                 <p onClick={(e)=>{setHamburgerNav(false); setSearchTypeValue('Title'); e.stopPropagation()}}>Title</p>
                                 {/* <p onClick={(e)=>{setHamburgerNav(false); setSearchTypeValue('Author'); e.stopPropagation()}}>Author</p>
+                                
                                  */}
                                 <p onClick={(e)=>{setHamburgerNav(false); setSearchTypeValue('Genre'); e.stopPropagation()}}>Genre</p>
                                 <p onClick={(e)=>{setHamburgerNav(false); setSearchTypeValue('All Types'); e.stopPropagation()}}>All Types</p>
@@ -187,4 +116,4 @@ function Binder({setProfileOpen, profileOpen}){
 
 }
 
-export default React.memo(NavBar);
+export default NavBar;

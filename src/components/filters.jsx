@@ -2,27 +2,24 @@ import style from './styles/filters.module.css';
 import bag from './icons/bag-svgrepo-com.svg';
 import external from './icons/external-svgrepo-com.svg';
 import FilterComponent from './filterComponent';
-import React,{ useContext } from 'react';
+import React,{ useContext, useEffect, useState, useRef } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import UseContext from './useContext';
 
-export default function Filters({dispatch, filterState}){
+export default function Filters({filterCheck, dispatch, filterState}){
 
     const value = useContext(UseContext);
+    const [genra, setGenra] = useState('');
+    const [bookType, setBookType] = useState('');
+    const [sortBy, setSortBy] = useState('');
+    const initial = useRef(false);
 
-    async function fetchType(){
-
-        const value = await fetch('http://localhost:3000/filters', {
-
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: "GET"
-
-        })
-
-    } 
+    useEffect(()=>{
+        if(initial.current)
+            filterCheck(genra, bookType, sortBy)
+        else
+            initial.current = true;
+    },[genra, bookType, sortBy])
 
     return(
 
@@ -30,13 +27,13 @@ export default function Filters({dispatch, filterState}){
             
             <hr className={style.top} />
                 <div className={style.selectDiv}>
-                    <FilterComponent key={1} dispatch={dispatch} filterState={filterState} type='Genre'values={[]}/>
+                    <FilterComponent key={1} dispatch={dispatch} set={setGenra} filterState={filterState} type='Genre'values={["Horror","Love Romance","Biography","self help book","Fiction","Spirituality","Fairy tales","Adventure"]}/>
                 </div>
                 <div className={style.selectDiv}>
-                    <FilterComponent key={2} dispatch={dispatch} filterState={filterState} type='Book Types' values={[]}/>
+                    <FilterComponent key={2} dispatch={dispatch} set={setBookType} filterState={filterState} type='Book Types' values={["education", "comic", 'novel', '']}/>
                 </div>
                 <div className={style.selectDiv}>
-                    <FilterComponent key={3} dispatch={dispatch} filterState={filterState} type='Sort By' values={[]}/>
+                    <FilterComponent key={3} dispatch={dispatch} set={setSortBy} filterState={filterState} type='Sort By' values={["Rating", 'Latest', 'A-Z', 'Z-A']}/>
                 </div>
             <hr className={style.bottom}/>
             

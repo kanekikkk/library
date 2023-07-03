@@ -1,5 +1,6 @@
 const Pool = require('pg').Pool;
 const file = require('fs');
+const dirTree = require("directory-tree");
 
 const pool = new Pool({
 
@@ -11,10 +12,31 @@ const pool = new Pool({
 
 });
 
-const pdf = "./E books/Spirituality/The untethered soul - the journey beyond yourself/The-Untethered-Soul-PDF.pdf";
-const file_ = file.readFileSync(`${pdf}`);
+const tree = dirTree('./Text');
 
-const image = "./E books/Spirituality/The untethered soul - the journey beyond yourself/59552636.jpg";
-const imgFile = file.readFileSync(`${image}`);
+function map(tree){
 
-new Promise ( (res, rej)=>res(pool.query(`insert into pdf(pdf, image, name, genre) values($1, $2, 'The untethered soul - the journey beyond yourself', Array['Spirituality'])`,[file_, imgFile])));
+    for(i = 0; i < tree.children.length; i++){
+
+        if(tree.children[i] != null){
+
+            map(tree[i]);
+            console.log(tree);
+
+
+        }else{
+
+            return;
+
+        }
+
+    }
+
+}
+map(tree);
+
+
+// const image = "./E books/Spirituality/The untethered soul - the journey beyond yourself/59552636.jpg";
+// const imgFile = file.readFileSync(`${image}`);
+
+// new Promise ( (res, rej)=>res(pool.query(`insert into pdf(pdf, image, name, genre) values($1, $2, 'The untethered soul - the journey beyond yourself', Array['Spirituality'])`,[file_, imgFile])));

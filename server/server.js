@@ -2,13 +2,12 @@ const express = require("express");
 const path = require("path");
 const pool = require("./connectDatabase");
 const PDFDocument = require('pdfkit');
-const file = require('fs');
-
+const file = require('fs')
 const app = express();
 
 app.use(express.json());  
 app.use(express.urlencoded({ extended: false }));
-
+let email, id;
 app.use("/", express.static(path.join(__dirname, '..',"dist")));
 
 // server handler
@@ -20,9 +19,6 @@ app.post('/signUp', async(req, res)=>{
   try{
 
     const a = await pool.query('insert into login(email, password, username) values($1, $2, $3)', [req.body.email, req.body.password, req.body.name]);
-    let id = await pool.query(`select id from login where email = '${req.body.email}'`);
-    let library = 'library' + id.rows[0].id;
-    pool.query(`create table ${library}(id BIGSERIAL primary key, book_id bigint REFERENCES pdf(id), profile_id bigint REFERENCES login(id))`);
 
   }catch (err){
 
@@ -31,6 +27,34 @@ app.post('/signUp', async(req, res)=>{
   }
 
   res.send(true);
+
+})
+app.post('/library', async(req, res)=>{
+
+  try{
+
+    const a = await pool.query(`select id from login where email = '${email}'`);
+    const b = await pool.query(`select id from library where profile_id = ${a.rows[0].id}`);
+
+
+  }catch (err){
+
+    console.log(err);
+
+  }
+
+})
+app.post('/addLibrary', async(req, res)=>{
+
+  try{
+
+    const b = await pool.query('insert into library(book_id, profile_id) values($1, $2)', [parseInt(req.body.id), parseInt(id)]);    
+
+  }catch (err){
+
+    console.log(err);
+
+  }
 
 })
 
@@ -62,7 +86,8 @@ app.put('/login', async (req, res)=>{
       res.json({msg: "Password didn't match"});
   
     }
-
+    email = a.rows[0].email;
+    id = a.rows[0].id;
     loginDbValue = {email : a.rows[0].email, username: a.rows[0].username}
 
   }catch (err){
@@ -72,35 +97,144 @@ app.put('/login', async (req, res)=>{
   }
 
 })
+app.post('/pdf', async(req, res)=>{
 
-// Site handler
-app.get('*', (req, res)=>{
+  try{
 
-    res.sendFile(path.join(__dirname, "..","dist", "index.html"));
+    let id = req.body.index;
+    value = await pool.query(`select * from pdf where id = ${id}`);
+    const buffer = value.rows[0].pdf;
+    res.writeHead(200, {
+      'Content-Type': 'application/pdf',
+      'Content-Length': buffer.length
+    });
+    res.end(buffer);
+
+  }catch(err){
+
+    console.log(err);
+
+  }
 
 })
+
 app.post('/search', async(req, res)=>{
 
-  // req.body;
-  // let value;
-  // if(req.body.searchTypeValue === 'All Types'){
+  let value;
+  if(req.body.searchTypeValue === 'All Types'){
 
-  //   value = await pool.query(`select * from pdf where title like '%${req.body.searchValue}%'`);
-  //   value.rows.map(value=> file.writeFileSync(`./pdf/${value.title}.pdf`, value.pdf, err=>console.log(err)));
+    value = await pool.query(`select * from pdf where title like '%${req.body.searchValue}%'`);
+    
+    let buffers = value.rows.map(value=>{
+    
+      return ({id: value.id, title: value.title ,src: Buffer.from(value.image).toString('base64')});
+    
+    });
 
-  // }else{
+    res.json(buffers);
 
-  //   value = await pool.query(`select * from pdf where ${req.body.searchTypeValue} like '%${req.body.searchValue}%'`);
+  }else{
 
-  // }
-  // res.sendFile(path.join(__dirname, "..","pdf", 'pdfasas.pdf'));
-  res.sendFile(path.join(__dirname, "..","pdf", 'pdfasas.pdf'));
+    value = await pool.query(`select * from pdf where ${req.body.searchTypeValue} like '%${req.body.searchValue}%'`);
+
+  }
 
 })
+app.post('/carousel', async(req, res)=>{
+
+  console.log('hello');
+
+  let value = await pool.query(`select * from pdf ORDER BY title limit 10 offset 10`); 
+  let buffers = value.rows.map(value=>{
+    
+    return ({id: value.id, title: value.title ,src: Buffer.from(value.image).toString('base64')});
+  
+  });
+
+  res.json(buffers);
+
+})
+app.post('/carousel2', async(req, res)=>{
+
+
+  let value = await pool.query(`select * from pdf ORDER BY title limit 10`); 
+  let buffers = value.rows.map(value=>{
+    
+    return ({id: value.id, title: value.title ,src: Buffer.from(value.image).toString('base64')});
+  
+  });
+  
+  res.json(buffers);
+
+})
+app.post('/carousel2', async(req, res)=>{
+
+
+  let value = await pool.query(`select * from pdf ORDER BY title limit 10`); 
+  let buffers = value.rows.map(value=>{
+    
+    return ({id: value.id, title: value.title ,src: Buffer.from(value.image).toString('base64')});
+  
+  });
+  
+  res.json(buffers);
+
+})
+app.post('/filter', async(req, res)=>{
+
+  if(req.body.genre === ''){
+
+    req.body.genre = '%';
+
+  }
+  if(req.body.bookType === ''){
+
+    req.body.bookType = '%';
+
+  }
+  if(req.body.sortBy === 'Z-A'){
+
+    console.log(req.body.sortBy);
+    req.body.sortBy = 'desc';
+
+  }
+  if(req.body.sortBy === 'A-Z'){
+
+    console.log('A-Z')
+    req.body.sortBy = 'asc';
+
+  }
+  let value = await pool.query(`select * from pdf where genre[1] like '${req.body.genre}' order by id ${req.body.sortBy}`); 
+  let buffers = value.rows.map(value=>{
+    
+    return ({id: value.id, title: value.title ,src: Buffer.from(value.image).toString('base64')});
+  
+  });
+  res.json(buffers);
+
+})
+app.post('/filter/:id', async(req, res)=>{
+
+  let value = await pool.query(`select * from pdf where genre[1] = '${req.body.type}'`); 
+  let buffers = value.rows.map(value=>{
+    
+    return ({id: value.id, title: value.title ,src: Buffer.from(value.image).toString('base64')});
+  
+  });
+  res.json(buffers);
+
+})
+
+// Site handler
 app.post('/feedback', (req, res)=>{
 
   console.log(req.body);
   res.send(true);
+
+})
+app.get('*', (req, res)=>{
+
+    res.sendFile(path.join(__dirname, "..","dist", "index.html"));
 
 })
 

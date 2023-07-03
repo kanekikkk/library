@@ -6,10 +6,50 @@ import arrow from './icons/back-svgrepo-com.svg';
 import style from './styles/details.module.css';
 
 import { useLocation } from 'react-router-dom';
+import { useContext } from 'react';
+import UseContext from './useContext';
 
 export default function Details(){
 
-    const location = useLocation();
+    const value = useContext(UseContext);
+    console.log(value);
+    let location = useLocation();
+    location = location.state.val;
+    console.log(location);
+
+    async function pdf(){
+
+        const pdf = await fetch('http://localhost:3000/pdf', {
+
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+            method: "Post",
+            body: JSON.stringify({index: location.index})
+
+        })
+        let a = await pdf.blob();
+        a = URL.createObjectURL(a);
+        window.open(a);
+
+
+    }
+
+    async function addLibrary(){
+
+        let response = await fetch('http://localhost:3000/addLibrary',{
+
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "Post",
+            body: JSON.stringify({index: location.index})
+        
+        })
+
+    }
 
     return <div className={"primaryWidth " + style.detailsDiv}>
 
@@ -22,10 +62,10 @@ export default function Details(){
 
                     <div className={style.imgDiv+' '+style.hide}>
 
-                        <img className={style.img} src={location.state.content.img} alt='bookImg' />
+                        <img className={style.img} src={location.src} alt='bookImg' />
 
                     </div>
-                    <h1>{location.state.content.name}</h1>
+                    <h1>{location.title}</h1>
                     <p className={style.author}>Author</p>
                     <div className={style.infoRating+' '+style.flex}>
 
@@ -33,7 +73,7 @@ export default function Details(){
 
                             <div className={style.flex}>
 
-                                <h5>{location.state.content.rating}</h5>
+                                <h5>7.5</h5>
                                 <div className={style.logo}>
 
                                     <img src={star} alt="star" />
@@ -78,7 +118,7 @@ export default function Details(){
 
                         <div>
 
-                            <button className={style.flex} onClick={()=>window.open(location.state.content.pdf)}>
+                            <button className={style.flex} onClick={(e)=>{pdf();e.stopPropagation()}}>
                             <div className={style.logo}>
                                 <img src={bookIcon} alt="" /> 
                             </div>Read</button>
@@ -86,7 +126,7 @@ export default function Details(){
                         </div>
                         <div>
 
-                            <button className={style.flex}>
+                            <button className={style.flex} onClick={(e)=>{addLibrary();e.stopPropagation();}}>
                             <div className={style.logo}>
                                  <img src={external} alt="" />
                             </div>Add Library</button>
@@ -105,7 +145,7 @@ export default function Details(){
 
                 <div className={style.imgDiv+' '+style.hideMin}>
 
-                    <img className={style.img} src={location.state.content.img} alt='bookImg' />
+                    <img className={style.img} src={location.src} alt='bookImg' />
 
                 </div>
 

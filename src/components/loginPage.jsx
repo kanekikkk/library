@@ -42,6 +42,7 @@ export default function Login(){
                 setErrorPassword(false);
                 nav('/');
                 value.setLoginCheck(true);
+                value.setEmail(name);
 
             }
 
